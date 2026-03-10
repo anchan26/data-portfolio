@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400&family=Space+Grotesk:wght@600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #0a0a0a;
+    --primary: #00FF99;
+    --foreground: #999999;
+    --heading: #ebebeb;
+    --surface: rgba(255, 255, 255, 0.03);
+    --subtle: rgba(255, 255, 255, 0.1);
+  }
+
+  body {
+    @apply bg-background text-foreground font-mono antialiased overflow-x-hidden;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-heading text-heading font-semibold tracking-tight;
+  }
+}
+
+@layer utilities {
+  .text-heading { @apply text-[var(--heading)]; }
+  .bg-surface { @apply bg-[var(--surface)]; }
+  .border-subtle { @apply border-[var(--subtle)]; }
+}
