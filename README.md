@@ -1,73 +1,54 @@
-# React + TypeScript + Vite
+# Akhil Anchan | Data Engineering Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A sleek, minimalist, dark-mode portfolio designed to showcase my experience in scalable ETL pipelines, cloud data architecture, and data analytics. 
 
-Currently, two official plugins are available:
+Built with performance and clean code in mind, this project mirrors the precision required in enterprise data engineering.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🛠 Tech Stack
+* **Framework:** React 18 + Vite
+* **Styling:** Tailwind CSS (v3)
+* **Animations:** Framer Motion
+* **Language:** TypeScript
+* **Deployment:** Vercel
 
-## React Compiler
+## ✨ Key Features
+* **Custom Scroll Spy:** Built a custom React Hook (`useActiveSection`) utilizing the `IntersectionObserver` API to track scroll position and dynamically update the sidebar navigation.
+* **Responsive Layout:** CSS Grid and Flexbox implementation ensuring a seamless experience across desktop, tablet, and mobile viewing.
+* **Component-Driven Architecture:** Highly modular React components for easy maintenance and scalability.
+* **Smooth Animations:** Integrated Framer Motion for scroll-triggered reveals and micro-interactions.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Running Locally
 
-## Expanding the ESLint configuration
+If you want to clone and run this project locally:
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+1. Clone the repository:
+   ```bash
+   git clone [https://github.com/anchan2698/YOUR-REPO-NAME.git](https://github.com/anchan2698/YOUR-REPO-NAME.git)
+   Navigate into the project directory:
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Bash
+cd YOUR-REPO-NAME
+Install the dependencies:
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Bash
+npm install
+Start the development server:
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Bash
+npm run dev
+📬 System Connect
+Email: akhilanchan@outlook.com
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+LinkedIn: linkedin.com/in/akhilanchan
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+*(Make sure to quickly swap `YOUR-REPO-NAME` in the "Running Locally" section with whatever you actually named your repository!)*
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Step 3: Push the Update to GitHub
+Now we just need to send this new file up to your GitHub. Open your Cursor terminal and run these three commands one by one:
+
+```bash
+git add README.md
+Bash
+git commit -m "Update README with project details"
+Bash
+git push
