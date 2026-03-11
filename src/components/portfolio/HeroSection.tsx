@@ -22,13 +22,14 @@ export default function HeroSection() {
 
       {/* Location, Coordinates, and Map */}
       <div className="flex flex-col gap-4 font-mono">
-        <p className="text-sm md:text-base text-foreground/80">
+        {/* Changed text size down to text-xs (extra small) */}
+        <p className="text-xs text-foreground/80">
           London, United Kingdom <span className="text-subtle ml-4 hidden md:inline-block">51.5173° N, 0.0813° W</span>
         </p>
-        <p className="text-sm text-subtle md:hidden mb-2">51.5173° N, 0.0813° W</p>
+        <p className="text-xs text-subtle md:hidden mb-2">51.5173° N, 0.0813° W</p>
         
         {/* Dark Mode Stylized Map Container */}
-        <div className="w-full max-w-md h-40 rounded border border-subtle overflow-hidden opacity-70 hover:opacity-100 transition-opacity duration-500">
+        <div className="w-full max-w-md h-40 rounded border border-subtle overflow-hidden opacity-80 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
           <iframe 
             width="100%" 
             height="100%" 
@@ -36,8 +37,8 @@ export default function HeroSection() {
             scrolling="no" 
             marginHeight={0} 
             marginWidth={0} 
-            src="https://www.openstreetmap.org/export/embed.html?bbox=-0.0860%2C51.5150%2C-0.0780%2C51.5190&amp;layer=mapnik&amp;marker=51.5173%2C-0.0813"
-            className="filter grayscale invert contrast-125"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-0.0865%2C51.5165%2C-0.0795%2C51.5185&amp;layer=mapnik&amp;marker=51.5173%2C-0.0813"
+            className="filter grayscale invert contrast-125 brightness-90 w-full h-full"
             title="Map of Liverpool Street, London"
           ></iframe>
         </div>
