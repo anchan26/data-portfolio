@@ -20,7 +20,7 @@ export default function Sidebar() {
   return (
     <>
       <nav className="hidden lg:flex fixed inset-y-0 left-0 w-60 border-r border-subtle bg-background flex-col p-8 z-50">
-        <div className="text-xl font-heading text-heading mb-12">AC.</div>
+        <div className="text-xl font-heading text-heading mb-12">AA</div>
         <div className="flex flex-col gap-6">
           {navItems.map(item => (
             <button
