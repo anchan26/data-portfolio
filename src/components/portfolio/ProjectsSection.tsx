@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -33,6 +34,60 @@ const projects = [
   },
 ];
 
+// We create a dedicated component for the card so it can cleanly track its own hover state
+function ProjectCard({ project, idx }: { project: any, idx: number }) {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, delay: idx * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`relative bg-surface border p-8 pb-28 rounded-sm cursor-pointer transition-colors duration-300 flex flex-col h-full ${
+        isHovered ? 'border-primary' : 'border-subtle/50'
+      }`}
+    >
+      <h3 className="text-xl font-bold text-heading mb-4">{project.title}</h3>
+      <p className="font-mono text-sm text-foreground/70 leading-relaxed">
+        {project.desc}
+      </p>
+      
+      <div className="absolute bottom-6 right-6 flex items-end gap-5">
+        
+        {/* Square */}
+        <div className="flex flex-col items-center gap-2">
+          <div className={`w-8 h-8 border-[1.5px] transition-colors duration-300 ${isHovered ? 'border-primary' : 'border-subtle/20'}`}></div>
+          <span className={`font-mono text-[10px] transition-all duration-300 transform ${isHovered ? 'opacity-100 text-primary translate-y-0' : 'opacity-0 translate-y-2'}`}>
+            {project.tech[0]}
+          </span>
+        </div>
+
+        {/* Circle */}
+        <div className="flex flex-col items-center gap-2">
+          <div className={`w-8 h-8 rounded-full border-[1.5px] transition-colors duration-300 ${isHovered ? 'border-primary' : 'border-subtle/20'}`}></div>
+          <span className={`font-mono text-[10px] transition-all duration-300 transform ${isHovered ? 'opacity-100 text-primary translate-y-0' : 'opacity-0 translate-y-2'}`}>
+            {project.tech[1]}
+          </span>
+        </div>
+
+        {/* Triangle */}
+        <div className="flex flex-col items-center gap-2">
+          <svg className={`w-9 h-9 mb-[-2px] transition-colors duration-300 ${isHovered ? 'text-primary' : 'text-subtle/20'}`} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L23 21H1L12 2Z" />
+          </svg>
+          <span className={`font-mono text-[10px] transition-all duration-300 transform ${isHovered ? 'opacity-100 text-primary translate-y-0' : 'opacity-0 translate-y-2'}`}>
+            {project.tech[2]}
+          </span>
+        </div>
+
+      </div>
+    </motion.div>
+  );
+}
+
 export default function ProjectsSection() {
   return (
     <section id="projects" className="py-24 border-t border-subtle">
@@ -40,49 +95,7 @@ export default function ProjectsSection() {
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {projects.map((project, idx) => (
-          <motion.div 
-            key={idx}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: idx * 0.1 }}
-            className="group relative bg-surface border border-subtle/50 hover:border-primary p-8 pb-28 rounded-sm cursor-pointer transition-colors duration-300 flex flex-col h-full"
-          >
-            <h3 className="text-xl font-bold text-heading mb-4">{project.title}</h3>
-            <p className="font-mono text-sm text-foreground/70 leading-relaxed">
-              {project.desc}
-            </p>
-            
-            <div className="absolute bottom-6 right-6 flex items-end gap-5">
-              
-              {/* Square */}
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-8 h-8 border-[1.5px] border-subtle/20 group-hover:border-primary transition-colors duration-300"></div>
-                <span className="font-mono text-[10px] opacity-0 group-hover:opacity-100 text-primary transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  {project.tech[0]}
-                </span>
-              </div>
-
-              {/* Circle */}
-              <div className="flex flex-col items-center gap-2">
-                <div className="w-8 h-8 rounded-full border-[1.5px] border-subtle/20 group-hover:border-primary transition-colors duration-300"></div>
-                <span className="font-mono text-[10px] opacity-0 group-hover:opacity-100 text-primary transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  {project.tech[1]}
-                </span>
-              </div>
-
-              {/* Triangle */}
-              <div className="flex flex-col items-center gap-2">
-                <svg className="w-9 h-9 mb-[-2px] text-subtle/20 group-hover:text-primary transition-colors duration-300" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2L23 21H1L12 2Z" />
-                </svg>
-                <span className="font-mono text-[10px] opacity-0 group-hover:opacity-100 text-primary transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
-                  {project.tech[2]}
-                </span>
-              </div>
-
-            </div>
-          </motion.div>
+          <ProjectCard key={idx} project={project} idx={idx} />
         ))}
       </div>
     </section>
