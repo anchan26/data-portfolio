@@ -3,11 +3,11 @@ import { motion } from 'framer-motion';
 const skillCategories = [
   {
     title: 'LANGUAGES',
-    skills: ['SQL', 'Python', 'R', 'PostgreSQL']
+    skills: ['Python', 'R', 'SQL']
   },
   {
     title: 'DATABASES & CLOUD',
-    skills: ['AWS', 'GCP', 'Azure', 'Snowflake']
+    skills: ['AWS', 'GCP', 'Azure', 'Snowflake', 'PostgreSQL']
   },
   {
     title: 'ETL & ANALYTICS TOOLS',
