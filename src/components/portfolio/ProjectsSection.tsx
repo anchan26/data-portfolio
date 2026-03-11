@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -35,72 +34,63 @@ const projects = [
 ];
 
 export default function ProjectsSection() {
-  // This state tracks which card is currently clicked/active
-  const [activeCard, setActiveCard] = useState<number | null>(null);
-
   return (
     <section id="projects" className="py-24 border-t border-subtle">
       <h2 className="text-3xl mb-12 font-bold text-heading">Projects</h2>
       
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project, idx) => {
-          const isActive = activeCard === idx;
-
-          return (
-            <motion.div 
-              key={idx}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: idx * 0.1 }}
-              onClick={() => setActiveCard(isActive ? null : idx)}
-              className={`group relative bg-surface border p-8 pb-28 rounded-sm cursor-pointer transition-colors duration-300 flex flex-col h-full ${
-                isActive ? 'border-primary' : 'border-subtle/50 hover:border-subtle'
-              }`}
-            >
-              {/* Text Content */}
-              <h3 className="text-xl font-bold text-heading mb-4">{project.title}</h3>
-              <p className="font-mono text-sm text-foreground/70 leading-relaxed">
-                {project.desc}
-              </p>
+        {projects.map((project, idx) => (
+          <motion.div 
+            key={idx}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ duration: 0.5, delay: idx * 0.1 }}
+            {/* Added 'group' here so all children know when this card is hovered */}
+            className="group relative bg-surface border border-subtle/50 hover:border-primary p-8 pb-28 rounded-sm cursor-pointer transition-colors duration-300 flex flex-col h-full"
+          >
+            {/* Text Content */}
+            <h3 className="text-xl font-bold text-heading mb-4">{project.title}</h3>
+            <p className="font-mono text-sm text-foreground/70 leading-relaxed">
+              {project.desc}
+            </p>
+            
+            {/* Bottom Right Shapes & Tech Stack Container */}
+            <div className="absolute bottom-6 right-6 flex items-end gap-5">
               
-              {/* Bottom Right Shapes & Tech Stack Container */}
-              <div className="absolute bottom-6 right-6 flex items-end gap-5">
-                
-                {/* Shape 1: Square */}
-                <div className="flex flex-col items-center gap-2">
-                  <div className={`w-8 h-8 border-[1.5px] transition-colors duration-300 ${isActive ? 'border-primary' : 'border-subtle/10'}`}></div>
-                  <span className={`font-mono text-[10px] transition-opacity duration-300 ${isActive ? 'opacity-100 text-primary' : 'opacity-0'}`}>
-                    {project.tech[0]}
-                  </span>
-                </div>
-
-                {/* Shape 2: Circle */}
-                <div className="flex flex-col items-center gap-2">
-                  <div className={`w-8 h-8 rounded-full border-[1.5px] transition-colors duration-300 ${isActive ? 'border-primary' : 'border-subtle/10'}`}></div>
-                  <span className={`font-mono text-[10px] transition-opacity duration-300 ${isActive ? 'opacity-100 text-primary' : 'opacity-0'}`}>
-                    {project.tech[1]}
-                  </span>
-                </div>
-
-                {/* Shape 3: Triangle */}
-                <div className="flex flex-col items-center gap-2">
-                  <svg 
-                    className={`w-9 h-9 mb-[-2px] transition-colors duration-300 ${isActive ? 'text-primary' : 'text-subtle/10'}`} 
-                    viewBox="0 0 24 24" 
-                    fill="currentColor"
-                  >
-                    <path d="M12 2L23 21H1L12 2Z" />
-                  </svg>
-                  <span className={`font-mono text-[10px] transition-opacity duration-300 ${isActive ? 'opacity-100 text-primary' : 'opacity-0'}`}>
-                    {project.tech[2]}
-                  </span>
-                </div>
-
+              {/* Shape 1: Square */}
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-8 h-8 border-[1.5px] border-subtle/10 group-hover:border-primary transition-colors duration-300"></div>
+                <span className="font-mono text-[10px] opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                  {project.tech[0]}
+                </span>
               </div>
-            </motion.div>
-          );
-        })}
+
+              {/* Shape 2: Circle */}
+              <div className="flex flex-col items-center gap-2">
+                <div className="w-8 h-8 rounded-full border-[1.5px] border-subtle/10 group-hover:border-primary transition-colors duration-300"></div>
+                <span className="font-mono text-[10px] opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                  {project.tech[1]}
+                </span>
+              </div>
+
+              {/* Shape 3: Triangle */}
+              <div className="flex flex-col items-center gap-2">
+                <svg 
+                  className="w-9 h-9 mb-[-2px] text-subtle/10 group-hover:text-primary transition-colors duration-300" 
+                  viewBox="0 0 24 24" 
+                  fill="currentColor"
+                >
+                  <path d="M12 2L23 21H1L12 2Z" />
+                </svg>
+                <span className="font-mono text-[10px] opacity-0 group-hover:opacity-100 group-hover:text-primary transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
+                  {project.tech[2]}
+                </span>
+              </div>
+
+            </div>
+          </motion.div>
+        ))}
       </div>
     </section>
   );
