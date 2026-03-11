@@ -1,11 +1,27 @@
+import { motion } from 'framer-motion';
+
 export default function HeroSection() {
   return (
     <section id="hero" className="min-h-screen flex flex-col justify-center relative py-20">
       
-      {/* Name */}
-      <h1 className="text-6xl md:text-8xl font-bold text-heading mb-6 tracking-tight">
+      {/* Flickering / Glitching Name */}
+      <motion.h1 
+        className="text-6xl md:text-8xl font-bold text-heading mb-6 tracking-tight"
+        animate={{ 
+          // Opacity drops down to 0.3 randomly, and X-axis jitters left/right slightly
+          opacity: [1, 1, 0.4, 1, 0.8, 1, 1, 0.3, 1, 0.9, 1],
+          x: [0, 0, -2, 2, -1, 0, 0, 2, -2, 1, 0]
+        }}
+        transition={{ 
+          duration: 3.5, 
+          repeat: Infinity, 
+          ease: "linear",
+          // The 'times' array controls exactly when the glitch happens during the 3.5 seconds
+          times: [0, 0.2, 0.22, 0.25, 0.27, 0.3, 0.7, 0.72, 0.75, 0.77, 1]
+        }}
+      >
         Akhil Anchan
-      </h1> 
+      </motion.h1> 
       
       {/* Role */}
       <h2 className="text-xl md:text-2xl text-primary font-mono mb-16">
@@ -16,13 +32,12 @@ export default function HeroSection() {
       <div className="flex items-center gap-6 mb-16">
         <div className="w-16 h-[1px] bg-subtle"></div>
         <p className="font-mono text-sm md:text-base text-foreground/80">
-          Building scalable data pipelines across regulated environments.
+          Building scalable data systems across regulated environments.
         </p>
       </div>
 
       {/* Location, Coordinates, and Map */}
       <div className="flex flex-col gap-4 font-mono">
-        {/* Changed text size down to text-xs (extra small) */}
         <p className="text-xs text-foreground/80">
           London, United Kingdom <span className="text-subtle ml-4 hidden md:inline-block">51.5173° N, 0.0813° W</span>
         </p>
