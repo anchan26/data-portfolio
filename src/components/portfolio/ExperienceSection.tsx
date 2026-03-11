@@ -13,7 +13,7 @@ const experiences = [
       'Optimised Snowflake SQL workflows using streams, tasks, and Snowpipe to reduce data processing latency from 6 hours to 90 minutes—enabling real-time compliance monitoring across 50+ trading desks.',
       'Partnered with global trading firms across AMER, APAC, and EMEA to design compliance analytics frameworks using Python and SQL, identifying root-cause data issues and reducing regulatory incidents by 30%.',
       'Developed Power BI dashboards spanning multi-pillar governance metrics including user reconciliation, data integrity validation, and audio quality scoring for real-time executive visibility.',
-      'Built and managed PostgreSQL-based ETL pipelines using triggers and scheduled functions to ingest structured voice and communications metadata from third-party APIs, ensuring data freshness within a 15-minute SLA'
+      'Built and managed PostgreSQL-based ETL pipelines using triggers and scheduled functions to ingest structured voice and communications metadata from third-party APIs, ensuring data freshness within a 15-minute SLA',
       'Led technical commercial engagements including RFP responses and contractual documentation, working with Data Owners to define data handling requirements and access management boundaries.'
     ]
   },
