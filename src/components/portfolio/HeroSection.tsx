@@ -16,7 +16,7 @@ export default function HeroSection() {
       <div className="flex items-center gap-6 mb-16">
         <div className="w-16 h-[1px] bg-subtle"></div>
         <p className="font-mono text-sm md:text-base text-foreground/80">
-          Building scalable data systems across regulated environments.
+          Building scalable data pipelines across regulated environments.
         </p>
       </div>
 
