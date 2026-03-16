@@ -4,7 +4,7 @@ export default function ContactSection() {
       <h2 className="text-3xl mb-12 font-heading text-heading font-semibold">Contact</h2>
       
       <p className="mb-12 max-w-xl text-foreground leading-relaxed">
-        Open to opportunities in data engineering, analytics infrastructure, and platform engineering.
+        Open to opportunities in data engineering, data analytics and forward deployed engineer roles.
       </p>
       
       {/* CSS Grid for perfect alignment */}
