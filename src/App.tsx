@@ -1,170 +1,140 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-// --- HACKER TEXT COMPONENT ---
-const ScrambleText = ({ text }: { text: string }) => {
-  const [display, setDisplay] = useState(text);
-  const chars = "!@#$%^&*()_+NK67";
-
-  useEffect(() => {
-    let iteration = 0;
-    const interval = setInterval(() => {
-      setDisplay(text.split("").map((letter, index) => {
-        if (letter === " " || index < iteration) return text[index];
-        return chars[Math.floor(Math.random() * chars.length)];
-      }).join(""));
-      if (iteration >= text.length) clearInterval(interval);
-      iteration += 1 / 3;
-    }, 30);
-    return () => clearInterval(interval);
-  }, [text]);
-
-  return <span>{display}</span>;
+// --- STACK DATA ---
+const stack = {
+  dataEngineering: ['Snowflake', 'AWS', 'Airflow', 'dbt', 'PostgreSQL', 'Terraform'],
+  analytics: ['SQL', 'Python', 'R', 'Power BI', 'Tableau', 'Looker'],
+  aiAndLLMs: ['OpenAI', 'LangChain', 'Pinecone', 'HuggingFace', 'LlamaIndex'],
+  tools: ['Git', 'Docker', 'Kubernetes', 'Jira']
 };
 
-export default function Dashboard() {
+export default function PersonalWebsite() {
+  const [chatInput, setChatInput] = useState("");
+
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-foreground p-4 md:p-8 font-mono">
+    <div className="min-h-screen bg-[#FDFCF0] text-[#1a1a1a] font-sans selection:bg-primary/20">
       
-      {/* HEADER INFO */}
-      <div className="max-w-7xl mx-auto mb-8 flex justify-between items-end border-b border-subtle/20 pb-4">
-        <div className="text-[10px] text-primary tracking-[0.4em] uppercase">System_Status: Operational</div>
-        <div className="text-[10px] text-subtle uppercase">London_UK // 51.5072° N</div>
-      </div>
-
-      {/* --- BENTO GRID START --- */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-4 md:grid-rows-4 gap-4 auto-rows-fr">
-        
-        {/* 1. IDENTITY TILE */}
-        <motion.div 
+      {/* 1. HERO SECTION */}
+      <section className="max-w-4xl mx-auto pt-32 pb-20 px-6 text-center">
+        <motion.h1 
           initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-          className="md:col-span-2 md:row-span-2 bg-surface border border-subtle/30 p-8 rounded-3xl flex flex-col justify-between"
+          className="text-5xl md:text-6xl font-bold tracking-tight mb-8"
         >
-          <div className="space-y-6">
-            <h1 className="text-5xl md:text-7xl font-bold text-heading tracking-tighter">
-              <ScrambleText text="Akhil Anchan" />
-            </h1>
-            <p className="text-foreground/60 max-w-sm text-sm leading-relaxed">
-              Data Engineer specializing in high-velocity pipelines and quantitative sports modeling. 
-              Currently optimizing value-identification engines for cricket and global markets.
-            </p>
-          </div>
-          <div className="flex gap-4">
-            <div className="px-4 py-2 bg-primary/10 border border-primary/20 rounded-full text-primary text-[10px] font-bold">DATA_ENGINEER</div>
-            <div className="px-4 py-2 bg-white/5 border border-white/10 rounded-full text-subtle text-[10px] font-bold">QUANT_STRAT</div>
-          </div>
-        </motion.div>
+          Hi, I'm Akhil Anchan
+        </motion.h1>
+        <motion.p 
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}
+          className="text-lg md:text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto"
+        >
+          I’m a <span className="text-black font-semibold">Data Engineer</span> dedicated to architecting high-performance pipelines that turn raw complexity into actionable intelligence. 
+          Currently, I'm bridging the gap between data and <span className="text-black font-semibold">AI Engineering</span>—exploring how to move LLMs from experimental prototypes into robust, real-world production systems.
+        </motion.p>
+      </section>
 
-        {/* 2. QUANT LAB: CRICKET & TRADING */}
-        <motion.div 
-          whileHover={{ scale: 1.01 }}
-          className="md:col-span-2 bg-surface border border-subtle/30 p-6 rounded-3xl flex flex-col justify-between group"
-        >
-          <div className="flex justify-between items-start">
-            <h3 className="text-xs font-bold text-subtle uppercase tracking-widest">Quant_Lab</h3>
-            <span className="text-primary text-[10px]">[ACTIVE_MODEL]</span>
+      {/* 2. VIRTUAL ASSISTANT (The Ignacio Look) */}
+      <section className="max-w-3xl mx-auto px-6 mb-32">
+        <div className="bg-white/50 backdrop-blur-sm border border-gray-200 rounded-3xl p-8 shadow-sm">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-bold mb-2">Ask about Akhil</h2>
+            <p className="text-sm text-gray-500">I'm Akhil's virtual assistant. Feel free to ask me anything about his work or interests.</p>
           </div>
-          <div className="grid grid-cols-2 gap-8 py-4">
-            <div>
-              <p className="text-[10px] text-subtle mb-1 uppercase">Cricket_EV_Index</p>
-              <p className="text-3xl font-bold text-heading">+1.82</p>
-            </div>
-            <div>
-              <p className="text-[10px] text-subtle mb-1 uppercase">Algo_Strategy_Alpha</p>
-              <p className="text-3xl font-bold text-heading">14.2%</p>
-            </div>
-          </div>
-          {/* Animated Waveform */}
-          <div className="h-8 flex items-end gap-1 overflow-hidden">
-            {[40, 70, 45, 90, 65, 80, 30, 60, 40, 95, 50, 70].map((h, i) => (
-              <motion.div 
-                key={i} 
-                animate={{ height: [`${h}%`, `${h+10}%`, `${h}%`] }} 
-                transition={{ repeat: Infinity, duration: 2, delay: i * 0.1 }}
-                className="flex-1 bg-primary/30 rounded-t-sm" 
-              />
+          
+          <div className="flex flex-wrap justify-center gap-2 mb-10">
+            {["Who is Akhil?", "Current Projects?", "What's his stack?", "Cricket & MMA?"].map((chip) => (
+              <button key={chip} className="px-4 py-2 bg-white border border-gray-100 rounded-full text-xs font-medium text-gray-600 hover:border-gray-300 transition-all shadow-sm">
+                {chip}
+              </button>
             ))}
           </div>
-        </motion.div>
 
-        {/* 3. FOOTBALL TRACKER */}
-        <motion.div 
-          whileHover={{ scale: 1.01 }}
-          className="md:col-span-1 bg-surface border border-subtle/30 p-6 rounded-3xl flex flex-col justify-between"
-        >
-          <h3 className="text-xs font-bold text-subtle uppercase">Pitch_Side</h3>
-          <div className="text-center py-4">
-            <div className="text-[10px] text-subtle mb-2 uppercase">Next_Fixture</div>
-            <div className="flex items-center justify-center gap-3 text-xl font-bold text-heading">
-              <span>LIV</span>
-              <span className="text-xs text-primary">VS</span>
-              <span>MCI</span>
-            </div>
+          <div className="relative">
+            <input 
+              type="text" 
+              placeholder="What's your question?" 
+              className="w-full bg-white border border-gray-200 rounded-2xl py-4 px-6 focus:outline-none focus:ring-2 focus:ring-gray-100 transition-all shadow-inner"
+            />
+            <button className="absolute right-3 top-1/2 -translate-y-1/2 bg-gray-100 p-2 rounded-xl hover:bg-gray-200 transition-colors">
+              <span className="text-gray-400">↑</span>
+            </button>
           </div>
-          <div className="text-[10px] text-center text-primary/60">ANFIELD // SUN 16:30</div>
-        </motion.div>
+          <p className="text-center text-[10px] text-gray-400 mt-4">Running on Next.js + Gemini 3 Flash Image</p>
+        </div>
+      </section>
 
-        {/* 4. FITNESS / STRAVA */}
-        <motion.div 
-          whileHover={{ scale: 1.01 }}
-          className="md:col-span-1 bg-surface border border-subtle/30 p-6 rounded-3xl flex flex-col justify-between group"
-        >
-          <h3 className="text-xs font-bold text-subtle uppercase">Fitness_Metrics</h3>
-          <div className="space-y-4">
-            <div>
-              <p className="text-3xl font-bold text-heading tracking-tighter">42.5<span className="text-xs ml-1 text-subtle">KM</span></p>
-              <p className="text-[10px] text-subtle uppercase">Weekly_Volume</p>
-            </div>
-            <div className="w-full bg-white/5 h-1 rounded-full overflow-hidden">
-              <motion.div initial={{ width: 0 }} animate={{ width: "70%" }} className="h-full bg-primary" />
-            </div>
-          </div>
-        </motion.div>
-
-        {/* 5. SPOTIFY LIVE */}
-        <motion.div 
-          whileHover={{ scale: 1.01 }}
-          className="md:col-span-3 bg-[#1DB954]/5 border border-[#1DB954]/20 p-6 rounded-3xl flex items-center justify-between"
-        >
-          <div className="flex items-center gap-5">
-            <div className="relative">
-              <div className="w-12 h-12 bg-[#1DB954] rounded-full flex items-center justify-center animate-spin-slow">
-                <span className="text-black text-xl">●</span>
+      {/* 3. STACK (The Image Layout) */}
+      <section className="max-w-5xl mx-auto px-6 mb-32">
+        <h3 className="text-2xl font-bold mb-2">Stack</h3>
+        <p className="text-sm text-gray-500 mb-8">Technologies I work with and focus on the most.</p>
+        
+        <div className="space-y-10">
+          {[
+            { label: "Data Engineering", items: stack.dataEngineering },
+            { label: "Analytics & Intelligence", items: stack.analytics },
+            { label: "AI, LLMs & SDKs", items: stack.aiAndLLMs },
+            { label: "Tools & Cloud", items: stack.tools }
+          ].map((cat) => (
+            <div key={cat.label}>
+              <h4 className="text-sm font-mono text-gray-400 uppercase tracking-widest mb-4">{cat.label}</h4>
+              <div className="flex flex-wrap gap-3">
+                {cat.items.map((item) => (
+                  <div key={item} className="flex items-center gap-2 bg-white border border-gray-100 px-4 py-2 rounded-full shadow-sm">
+                    <div className="w-4 h-4 bg-gray-100 rounded-sm"></div> {/* Placeholder for actual icons */}
+                    <span className="text-sm font-medium">{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
-            <div>
-              <p className="text-xs text-subtle uppercase mb-1">Now_Playing</p>
-              <h4 className="text-lg font-bold text-heading leading-none">Starboy</h4>
-              <p className="text-xs text-[#1DB954]">The Weeknd</p>
+          ))}
+        </div>
+      </section>
+
+      {/* 4. LIFE & PERFORMANCE GRID (Cricket, MMA, Spotify) */}
+      <section className="max-w-5xl mx-auto px-6 pb-32">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          {/* Cricket Card */}
+          <div className="bg-white border border-gray-100 p-6 rounded-3xl shadow-sm">
+            <h4 className="text-xs font-bold text-gray-400 uppercase mb-4">Cricket_Analysis</h4>
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-2xl font-bold">IPL 2026</span>
+              <span className="text-[10px] text-green-500 font-bold uppercase tracking-tighter">Live Odds</span>
+            </div>
+            <div className="text-sm text-gray-600">Developing Poisson models to identify market inefficiencies in T20 match outcomes.</div>
+          </div>
+
+          {/* MMA Card */}
+          <div className="bg-white border border-gray-100 p-6 rounded-3xl shadow-sm">
+            <h4 className="text-xs font-bold text-gray-400 uppercase mb-4">Combat_Sports</h4>
+            <div className="flex items-center gap-4 py-4">
+              <div className="text-center flex-1">
+                <p className="text-xs text-gray-400 uppercase">Next_UFC</p>
+                <p className="font-bold">UFC 310</p>
+              </div>
+              <div className="w-[1px] h-10 bg-gray-100"></div>
+              <div className="text-center flex-1">
+                <p className="text-xs text-gray-400 uppercase">Training</p>
+                <p className="font-bold">Muay Thai</p>
+              </div>
             </div>
           </div>
-          <div className="flex gap-1 h-6">
-            {[1, 2, 3, 4, 3, 2, 1].map((_, i) => (
-              <motion.div key={i} animate={{ scaleY: [1, 2, 1] }} transition={{ repeat: Infinity, duration: 0.6, delay: i * 0.1 }} className="w-1 bg-[#1DB954] rounded-full" />
-            ))}
+
+          {/* Spotify Card */}
+          <div className="bg-[#1DB954]/5 border border-[#1DB954]/10 p-6 rounded-3xl flex flex-col justify-center">
+            <div className="flex items-center gap-4">
+              <div className="w-10 h-10 bg-[#1DB954] rounded-full flex items-center justify-center animate-spin-slow">
+                <span className="text-black">♫</span>
+              </div>
+              <div>
+                <p className="text-[10px] text-gray-400 uppercase">Spotify_Live</p>
+                <p className="text-sm font-bold truncate">Starboy</p>
+                <p className="text-[10px] text-gray-500">The Weeknd</p>
+              </div>
+            </div>
           </div>
-        </motion.div>
 
-        {/* 6. CORE STACK */}
-        <div className="md:col-span-1 bg-surface border border-subtle/30 p-6 rounded-3xl flex flex-col justify-center items-center">
-          <p className="text-[10px] text-subtle uppercase mb-3">Core_Engine</p>
-          <div className="flex flex-wrap gap-2 justify-center">
-            {['PY', 'SQL', 'AWS', 'SNOW'].map(t => (
-              <span key={t} className="px-2 py-1 border border-subtle/20 text-[10px] text-heading font-bold">{t}</span>
-            ))}
-          </div>
         </div>
-
-      </div>
-
-      {/* FOOTER */}
-      <footer className="max-w-7xl mx-auto mt-12 pt-8 border-t border-subtle/10 flex justify-between items-center text-[10px] text-subtle tracking-widest uppercase">
-        <div>© 2026 ANCH_DATA_SYSTEMS</div>
-        <div className="flex gap-6">
-          <a href="#" className="hover:text-primary transition-colors">Github</a>
-          <a href="#" className="hover:text-primary transition-colors">LinkedIn</a>
-        </div>
-      </footer>
+      </section>
 
     </div>
   );
