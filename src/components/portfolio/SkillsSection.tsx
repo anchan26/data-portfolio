@@ -5,9 +5,9 @@ const skillCategories = [
     label: "DATA ENGINEERING", 
     items: [
       { n: 'Snowflake', s: 'snowflake' },
-      { n: 'AWS', s: 'amazonaws' },
+      { n: 'AWS', img: '/aws.png' },
       { n: 'Airflow', s: 'apacheairflow' },
-      { n: 'dbt', s: 'dbt' },
+      { n: 'dbt', img: '/dbt.png' },
     
     ] 
   },
@@ -27,8 +27,8 @@ const skillCategories = [
     items: [
       { n: 'Python', s: 'python' },
       { n: 'Pandas', s: 'pandas' },
-      { n: 'Tableau', s: 'tableau' },
-      { n: 'Power BI', s: 'powerbi' }
+      { n: 'Tableau', img: '/tableau.png' },
+      { n: 'Power BI', img: '/powerbi.png' }
     ] 
   },
   { 
