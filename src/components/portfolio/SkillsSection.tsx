@@ -1,47 +1,89 @@
 import { motion } from 'framer-motion';
 
 const skillCategories = [
-  {
-    title: 'LANGUAGES',
-    skills: ['Python', 'R', 'SQL']
+  { 
+    label: "DATA ENGINEERING", 
+    items: [
+      { n: 'Snowflake', s: 'snowflake' },
+      { n: 'AWS', s: 'amazonaws' },
+      { n: 'Airflow', s: 'apacheairflow' },
+      { n: 'dbt', s: 'dbt' },
+    
+    ] 
   },
-  {
-    title: 'DATABASES & CLOUD',
-    skills: ['AWS', 'GCP', 'Azure', 'Snowflake', 'PostgreSQL']
+  { 
+    label: "AI, COPILOTS & SDKS", 
+    items: [
+      { n: 'OpenAI', s: 'openai' },
+      { n: 'Claude', s: 'anthropic' },
+      { n: 'Ollama', s: 'ollama' },
+      { n: 'Perplexity', s: 'perplexity' },
+      { n: 'Cursor', s: 'cursor' }
+      
+    ] 
   },
-  {
-    title: 'ETL & ANALYTICS TOOLS',
-    skills: ['Power BI', 'Tableau', 'Qlik', 'Alteryx', 'KNIME']
+  { 
+    label: "ANALYTICS & INTELLIGENCE", 
+    items: [
+      { n: 'Python', s: 'python' },
+      { n: 'Pandas', s: 'pandas' },
+      { n: 'Tableau', s: 'tableau' },
+      { n: 'Power BI', s: 'powerbi' }
+    ] 
+  },
+  { 
+    label: "LOWCODE, TOOLS & EXTRAS", 
+    items: [
+      { n: 'Git', s: 'git' },
+      { n: 'GitHub', s: 'github' },
+      { n: 'KNIME', s:   'knime' },
+      { n: 'n8n', s: 'n8n' },
+      { n: 'Docker', s: 'docker' },
+      { n: 'Vercel', s: 'vercel' }
+    ] 
   }
 ];
 
 export default function SkillsSection() {
   return (
-    <section id="skills" className="py-24 border-t border-subtle">
-      <h2 className="text-3xl mb-16 font-bold text-heading">Skills</h2>
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8">
-        {skillCategories.map((category, idx) => (
+    <section id="skills" className="py-24 border-b border-subtle/20">
+      <motion.h2 
+        initial={{ opacity: 0, x: -20 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        viewport={{ once: true }}
+        className="text-3xl font-bold text-heading mb-12"
+      >
+        Stack
+      </motion.h2>
+
+      <div className="space-y-12">
+        {skillCategories.map((cat, idx) => (
           <motion.div 
-            key={idx}
+            key={cat.label}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: idx * 0.15 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
           >
-            {/* Category Header */}
-            <h3 className="text-sm font-bold tracking-widest text-heading uppercase mb-8">
-              {category.title}
+            <h3 className="text-sm font-mono text-primary uppercase tracking-widest mb-6">
+              {cat.label}
             </h3>
-            
-            {/* Skills List */}
-            <ul className="space-y-4">
-              {category.skills.map((skill, i) => (
-                <li key={i} className="font-mono text-sm text-foreground/70 hover:text-primary transition-colors cursor-default">
-                  {skill}
-                </li>
+            <div className="flex flex-wrap gap-3">
+              {cat.items.map((item) => (
+                <div 
+                  key={item.n} 
+                  className="flex items-center gap-3 bg-[#111] border border-[#333] px-4 py-2 rounded-full shadow-sm hover:border-primary/50 transition-colors cursor-default"
+                >
+                  <img 
+                    src={`https://cdn.simpleicons.org/${item.s}`} 
+                    className="w-4 h-4 object-contain" 
+                    alt={`${item.n} logo`} 
+                    loading="lazy"
+                  />
+                  <span className="text-sm font-medium text-foreground/90">{item.n}</span>
+                </div>
               ))}
-            </ul>
+            </div>
           </motion.div>
         ))}
       </div>

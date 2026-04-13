@@ -74,15 +74,16 @@ export default function HeroSection() {
         </h1> 
         
         {/* Role */}
-        <h2 className="text-xl md:text-2xl text-primary font-mono mb-16">
-          Data Engineer
+        <h2 className="text-xl md:text-2xl text-primary font-mono mb-12">
+          Data & AI Engineer
         </h2> 
 
-        {/* Tagline */}
-        <div className="flex items-center gap-6 mb-16">
-          <div className="w-16 h-[1px] bg-subtle"></div>
-          <p className="font-mono text-sm md:text-base text-foreground/80">
-            Building scalable data systems across regulated environments.
+        {/* Updated Tagline / Bio */}
+        <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6 mb-16 max-w-3xl">
+          <div className="w-16 h-[1px] bg-subtle mt-3 shrink-0 hidden md:block"></div>
+          <p className="font-mono text-sm md:text-base text-foreground/80 leading-relaxed">
+            I’m a <span className="text-heading font-semibold">Data Engineer</span> focused on architecting scalable, high-integrity data systems. 
+            Currently, I am deeply interested in <span className="text-heading font-semibold">AI Engineering</span>, exploring how to move LLMs from experimental notebooks into robust, real-world production environments.
           </p>
         </div>
 
