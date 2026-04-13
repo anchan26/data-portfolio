@@ -5,10 +5,11 @@ const skillCategories = [
     label: "DATA ENGINEERING", 
     items: [
       { n: 'Snowflake', s: 'snowflake' },
-      { n: 'AWS', img: '/aws.png' },
+      { n: 'AWS', img: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
       { n: 'Airflow', s: 'apacheairflow' },
-      { n: 'dbt', img: '/dbt.png' },
-    
+      { n: 'dbt', img: 'https://cdn.worldvectorlogo.com/logos/dbt-bit.svg' },
+      { n: 'Kafka', s: 'apachekafka' },
+      { n: 'PostgreSQL', s: 'postgresql' }
     ] 
   },
   { 
@@ -31,17 +32,16 @@ const skillCategories = [
       { n: 'Power BI', img: '/powerbi.png' }
     ] 
   },
-  { 
-    label: "LOWCODE, TOOLS & EXTRAS", 
-    items: [
-      { n: 'Git', s: 'git' },
-      { n: 'GitHub', s: 'github' },
-      { n: 'KNIME', s:   'knime' },
-      { n: 'n8n', s: 'n8n' },
-      { n: 'Docker', s: 'docker' },
-      { n: 'Vercel', s: 'vercel' }
-    ] 
-  }
+
+    { 
+      label: "ANALYTICS & INTELLIGENCE", 
+      items: [
+        { n: 'Python', s: 'python' },
+        { n: 'Pandas', s: 'pandas' },
+        { n: 'Tableau', img: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Tableau_Logo.png' },
+        { n: 'Power BI', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg' }
+      ] 
+    }
 ];
 
 export default function SkillsSection() {
