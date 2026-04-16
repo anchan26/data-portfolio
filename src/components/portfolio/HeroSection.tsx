@@ -1,18 +1,85 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import LiveStatus from './LiveStatus'; // <--- THIS IMPORT MUST BE HERE
+import LiveStatus from './LiveStatus';
 
 export default function HeroSection() {
-  // ... (keep your existing isLoading and startScramble logic here) ...
+  const [isLoading, setIsLoading] = useState(true);
+  const [displayText, setDisplayText] = useState("Akhil Anchan");
+  
+  const finalName = "Akhil Anchan";
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%&*";
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      startScramble();
+    }, 2200);
+    return () => clearTimeout(timer);
+  }, []);
+
+  const startScramble = () => {
+    let iterations = 0;
+    const interval = setInterval(() => {
+      setDisplayText(
+        finalName.split("")
+          .map((letter, index) => {
+            if (letter === " ") return " ";
+            if (index < iterations) return finalName[index];
+            return chars[Math.floor(Math.random() * chars.length)];
+          })
+          .join("")
+      );
+      if (iterations >= finalName.length) clearInterval(interval);
+      iterations += 1 / 3; 
+    }, 30);
+  };
 
   return (
     <>
-      {/* ... (keep your Matrix preloader and Hero text here) ... */}
+      <AnimatePresence>
+        {isLoading && (
+          <motion.div 
+            initial={{ opacity: 1 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.6, ease: "easeInOut" }}
+            className="fixed inset-0 z-50 bg-[#0a0a0a] flex flex-col items-center justify-center font-mono text-primary text-sm p-6"
+          >
+            <div className="flex flex-col gap-2 w-full max-w-md">
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }}>&gt; INITIALIZING SECURE CONNECTION...</motion.p>
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>&gt; BYPASSING MAINFRAME...</motion.p>
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.2 }}>&gt; FETCHING DATA ENGINEER PROFILE...</motion.p>
+              <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1.7 }} className="text-white">&gt; ACCESS GRANTED.</motion.p>
+              <motion.div animate={{ opacity: [1, 0] }} transition={{ repeat: Infinity, duration: 0.8 }} className="mt-2 w-3 h-5 bg-primary"></motion.div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      <section id="hero" className="min-h-screen flex flex-col justify-center relative py-20">
+        
+        <h1 
+          onMouseEnter={startScramble}
+          className="text-6xl md:text-8xl font-bold text-heading mb-6 tracking-tight cursor-crosshair w-fit"
+        >
+          {displayText}
+        </h1> 
+        
+        <h2 className="text-xl md:text-2xl text-primary font-mono mb-12">
+          Data & AI Engineer
+        </h2> 
+
+        <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6 mb-16 max-w-3xl">
+          <div className="w-16 h-[1px] bg-subtle mt-3 shrink-0 hidden md:block"></div>
+          <p className="font-mono text-sm md:text-base text-foreground/80 leading-relaxed">
+            I’m a <span className="text-heading font-semibold">Data Engineer</span> focused on architecting scalable, high-integrity data systems. 
+            Currently, I am deeply interested in <span className="text-heading font-semibold">AI Engineering</span>, exploring how to move LLMs from experimental notebooks into robust, real-world production environments.
+          </p>
+        </div>
 
         {/* Location, Status & Map Area */}
         <div className="flex flex-col gap-2 font-mono">
           
-          {/* THIS IS THE COMPONENT CALL. It must be inside the div! */}
+          {/* THE NEW LIVE STATUS COMPONENT */}
           <LiveStatus />
 
           <p className="text-xs text-foreground/80">
@@ -29,7 +96,10 @@ export default function HeroSection() {
           </div>
         </div>
 
-        {/* ... (keep your shapes at the bottom) ... */}
+        <div className="absolute bottom-10 left-0 flex gap-4 text-subtle/20 text-xl">
+          <span>◆</span><span>●</span><span>▲</span>
+        </div>
+
       </section>
     </>
   );
