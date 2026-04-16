@@ -5,27 +5,25 @@ const skillCategories = [
     label: "DATA ENGINEERING", 
     items: [
       { n: 'Snowflake', s: 'snowflake' },
-      { n: 'AWS', s: 'amazonaws', c: 'white' }, // Forced white
-      { n: 'Airflow', s: 'apacheairflow' },
-      { n: 'dbt', s: 'dbt' },
-      { n: 'Kafka', s: 'apachekafka' },
-      { n: 'PostgreSQL', s: 'postgresql' }
+      { n: 'AWS', s: 'amazonaws', c: 'white' }, 
+      { n: 'dbt', s: 'dbt', c: 'FF694B' } // Using dbt's official orange hex color
     ] 
   },
   { 
     label: "AI, COPILOTS & SDKS", 
     items: [
-      { n: 'OpenAI', s: 'openai', c: 'white' }, // Forced white
+      { n: 'OpenAI', s: 'openai', c: 'white' },
       { n: 'Claude', s: 'anthropic' },
-      { n: 'Ollama', s: 'ollama', c: 'white' }, // Forced white
+      { n: 'Ollama', s: 'ollama', c: 'white' },
       { n: 'Perplexity', s: 'perplexity' },
-      { n: 'Cursor', s: 'cursor', c: 'white' }  // Forced white
+      { n: 'Cursor', s: 'cursor', c: 'white' }
     ] 
   },
   { 
     label: "ANALYTICS & INTELLIGENCE", 
     items: [
       { n: 'Python', s: 'python' },
+      { n: 'SQL', s: 'mysql', c: 'white' }, // Using the MySQL logo in white as a clean SQL icon
       { n: 'Pandas', s: 'pandas' },
       { n: 'Tableau', s: 'tableau' },
       { n: 'Power BI', s: 'powerbi' }
@@ -35,9 +33,9 @@ const skillCategories = [
     label: "TOOLS & EXTRAS", 
     items: [
       { n: 'Git', s: 'git' },
-      { n: 'GitHub', s: 'github', c: 'white' }, // Forced white
+      { n: 'GitHub', s: 'github', c: 'white' },
       { n: 'Docker', s: 'docker' },
-      { n: 'Vercel', s: 'vercel', c: 'white' }   // Forced white
+      { n: 'Vercel', s: 'vercel', c: 'white' }
     ] 
   }
 ];
@@ -69,7 +67,7 @@ export default function SkillsSection() {
             <div className="flex flex-wrap gap-3">
               {cat.items.map((item) => {
                 
-                // THE FIX: If there is a color 'c', add it. If not, just use the slug. No broken slashes.
+                // Pure CDN Logic: No external hotlinks that can break
                 const imageSource = item.c 
                   ? `https://cdn.simpleicons.org/${item.s}/${item.c}` 
                   : `https://cdn.simpleicons.org/${item.s}`;
