@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion';
+// We use Io5 and Fa because they are extremely stable and rarely cause build errors
 import { FaAws, FaPython, FaDocker, FaGithub, FaGitAlt, FaDatabase } from 'react-icons/fa';
-import { SiSnowflake, SiDbt, SiOpenai, SiPandas, SiTableau, SiPowerbi, SiVercel } from 'react-icons/si';
-import { BsRobot, BsStars, BsTerminal } from 'react-icons/bs';
+import { SiSnowflake, SiOpenai, SiVercel, SiDbt } from 'react-icons/si';
+import { IoAnalyticsOutline, IoStatsChartOutline, IoBarChartOutline, IoTerminalOutline, IoHardwareChipOutline } from 'react-icons/io5';
 
 const skillCategories = [
   { 
@@ -9,17 +10,17 @@ const skillCategories = [
     items: [
       { n: 'Snowflake', icon: <SiSnowflake className="w-4 h-4 text-[#29B5E8]" /> },
       { n: 'AWS', icon: <FaAws className="w-5 h-5 text-white" /> }, 
-      { n: 'dbt', icon: <SiDbt className="w-4 h-4 text-[#FF694B]" /> } 
+      { n: 'dbt', icon: <IoHardwareChipOutline className="w-4 h-4 text-[#FF694B]" /> } 
     ] 
   },
   { 
     label: "AI, COPILOTS & SDKS", 
     items: [
       { n: 'OpenAI', icon: <SiOpenai className="w-4 h-4 text-white" /> },
-      { n: 'Claude', icon: <BsRobot className="w-4 h-4 text-[#D97757]" /> },
-      { n: 'Ollama', icon: <BsRobot className="w-4 h-4 text-white" /> },
-      { n: 'Perplexity', icon: <BsStars className="w-4 h-4 text-[#22B8CD]" /> },
-      { n: 'Cursor', icon: <BsTerminal className="w-4 h-4 text-white" /> }
+      { n: 'Claude', icon: <IoTerminalOutline className="w-4 h-4 text-[#D97757]" /> },
+      { n: 'Ollama', icon: <IoTerminalOutline className="w-4 h-4 text-white" /> },
+      { n: 'Perplexity', icon: <IoAnalyticsOutline className="w-4 h-4 text-[#22B8CD]" /> },
+      { n: 'Cursor', icon: <IoTerminalOutline className="w-4 h-4 text-white" /> }
     ] 
   },
   { 
@@ -27,9 +28,9 @@ const skillCategories = [
     items: [
       { n: 'Python', icon: <FaPython className="w-4 h-4 text-[#3776AB]" /> },
       { n: 'SQL', icon: <FaDatabase className="w-4 h-4 text-white" /> }, 
-      { n: 'Pandas', icon: <SiPandas className="w-4 h-4 text-white" /> },
-      { n: 'Tableau', icon: <SiTableau className="w-4 h-4 text-[#E97627]" /> },
-      { n: 'Power BI', icon: <SiPowerbi className="w-4 h-4 text-[#F2C811]" /> }
+      { n: 'Pandas', icon: <IoAnalyticsOutline className="w-4 h-4 text-white" /> },
+      { n: 'Tableau', icon: <IoStatsChartOutline className="w-4 h-4 text-[#E97627]" /> },
+      { n: 'Power BI', icon: <IoBarChartOutline className="w-4 h-4 text-[#F2C811]" /> }
     ] 
   },
   { 
@@ -73,7 +74,6 @@ export default function SkillsSection() {
                   key={item.n} 
                   className="flex items-center gap-3 bg-[#111] border border-[#333] px-4 py-2 rounded-full shadow-sm hover:border-primary/50 transition-colors cursor-default"
                 >
-                  {/* Rendering the React component directly instead of an <img> tag */}
                   {item.icon}
                   <span className="text-sm font-medium text-foreground/90">{item.n}</span>
                 </div>
