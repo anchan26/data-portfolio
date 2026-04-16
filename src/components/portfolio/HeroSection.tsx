@@ -68,25 +68,24 @@ export default function HeroSection() {
           Data & AI Engineer
         </h2> 
 
-        <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6 mb-16 max-w-3xl">
+        <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6 mb-12 max-w-3xl">
           <div className="w-16 h-[1px] bg-subtle mt-3 shrink-0 hidden md:block"></div>
-          <p className="font-mono text-sm md:text-base text-foreground/80 leading-relaxed">
-            I’m a <span className="text-heading font-semibold">Data Engineer</span> focused on architecting scalable, high-integrity data systems. 
-            Currently, I am deeply interested in <span className="text-heading font-semibold">AI Engineering</span>, exploring how to move LLMs from experimental notebooks into robust, real-world production environments.
+          {/* SIMPLIFIED BIO SECTION */}
+          <p className="font-sans text-base md:text-lg text-foreground/80 leading-relaxed">
+            I'm a <span className="text-heading font-semibold">Data Engineer</span> who builds the behind-the-scenes infrastructure that safely handles massive amounts of company data. 
+            Currently, I'm expanding into <span className="text-heading font-semibold">AI Engineering</span>—taking powerful AI models out of the lab and turning them into reliable, real-world tools that solve actual business problems.
           </p>
         </div>
 
-        {/* Location, Status & Map Area */}
         <div className="flex flex-col gap-2 font-mono">
           
-          {/* THE NEW LIVE STATUS COMPONENT */}
           <LiveStatus />
 
-          <p className="text-xs text-foreground/80">
+          <p className="text-xs text-foreground/80 mt-2">
             London, United Kingdom <span className="text-subtle ml-4 hidden md:inline-block">51.5173° N, 0.0813° W</span>
           </p>
           
-          <div className="w-full max-w-md h-40 rounded border border-subtle/30 overflow-hidden opacity-80 hover:opacity-100 transition-opacity duration-500 pointer-events-none mt-4">
+          <div className="w-full max-w-md h-40 rounded border border-subtle/30 overflow-hidden opacity-80 hover:opacity-100 transition-opacity duration-500 pointer-events-none mt-2">
             <iframe 
               width="100%" height="100%" frameBorder="0" scrolling="no" 
               src="https://www.openstreetmap.org/export/embed.html?bbox=-0.0865%2C51.5165%2C-0.0795%2C51.5185&amp;layer=mapnik&amp;marker=51.5173%2C-0.0813"
