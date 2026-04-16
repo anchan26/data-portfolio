@@ -1,28 +1,37 @@
 import { useState, useEffect } from 'react';
 
 export default function LiveStatus() {
-  const [time, setTime] = useState('');
-  // Native browser API to check if the user is actually online
+  const [londonTime, setLondonTime] = useState('');
+  const [localTime, setLocalTime] = useState('');
   const [isOnline, setIsOnline] = useState(typeof navigator !== 'undefined' ? navigator.onLine : true);
 
   useEffect(() => {
-    // 1. Time Logic
     const updateTime = () => {
       const now = new Date();
-      const options: Intl.DateTimeFormatOptions = {
+      
+      // 1. Fixed London Time (HQ)
+      const londonOptions: Intl.DateTimeFormatOptions = {
         timeZone: 'Europe/London',
         hour: '2-digit',
         minute: '2-digit',
         second: '2-digit',
         hour12: false,
       };
-      setTime(new Intl.DateTimeFormat('en-GB', options).format(now));
+      setLondonTime(new Intl.DateTimeFormat('en-GB', londonOptions).format(now));
+
+      // 2. Dynamic Local Time (Visitor's Timezone)
+      const localOptions: Intl.DateTimeFormatOptions = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: false,
+      };
+      setLocalTime(new Intl.DateTimeFormat('en-GB', localOptions).format(now));
     };
 
     updateTime();
     const timer = setInterval(updateTime, 1000);
 
-    // 2. Network Status Event Listeners
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
 
@@ -37,34 +46,26 @@ export default function LiveStatus() {
   }, []);
 
   return (
-    <div className="flex flex-wrap items-center gap-4 font-mono text-[10px] tracking-[0.2em] text-foreground/50 uppercase mb-4">
+    <div className="flex flex-wrap items-center gap-3 md:gap-4 font-mono text-xs md:text-sm tracking-widest text-foreground/70 uppercase mb-6 bg-[#111] w-fit px-4 py-2 md:py-3 rounded-full border border-[#333]">
       
-      {/* ONLINE / OFFLINE STATUS */}
+      {/* SYSTEM STATUS */}
       <div className="flex items-center gap-2">
-        <span className="relative flex h-2 w-2">
-          {/* Only show the ping animation if we are online */}
+        <span className="relative flex h-3 w-3">
           {isOnline && <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ff41] opacity-75"></span>}
-          {/* Dot color changes based on network status */}
-          <span className={`relative inline-flex rounded-full h-2 w-2 ${isOnline ? 'bg-[#00ff41]' : 'bg-red-500'}`}></span>
+          <span className={`relative inline-flex rounded-full h-3 w-3 ${isOnline ? 'bg-[#00ff41]' : 'bg-red-500'}`}></span>
         </span>
-        {/* Text color and label change based on network status */}
         <span className={`font-bold ${isOnline ? 'text-[#00ff41]' : 'text-red-500'}`}>
           System: {isOnline ? 'Active' : 'Offline'}
         </span>
       </div>
 
-      <span className="text-subtle/30 hidden sm:block">|</span>
+      <span className="text-subtle/40 hidden sm:block">|</span>
 
-      {/* LONDON TIME */}
-      <div className="flex items-center gap-2">
-        <span>London: <span className="text-foreground/80">{time} GMT</span></span>
-      </div>
-
-      <span className="text-subtle/30 hidden sm:block">|</span>
-
-      {/* DATE */}
-      <div className="hidden sm:flex items-center gap-2">
-        <span>{new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' })}</span>
+      {/* DUAL CLOCKS */}
+      <div className="flex items-center gap-3 md:gap-4">
+        <span>LDN: <span className="text-white font-bold">{londonTime}</span></span>
+        <span className="text-subtle/40">|</span>
+        <span>LOCAL: <span className="text-white font-bold">{localTime}</span></span>
       </div>
 
     </div>
