@@ -5,9 +5,9 @@ const skillCategories = [
     label: "DATA ENGINEERING", 
     items: [
       { n: 'Snowflake', s: 'snowflake' },
-      { n: 'AWS', img: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
+      { n: 'AWS', s: 'amazonaws', c: 'white' }, // Forced white
       { n: 'Airflow', s: 'apacheairflow' },
-      { n: 'dbt', img: 'https://cdn.worldvectorlogo.com/logos/dbt-bit.svg' },
+      { n: 'dbt', s: 'dbt' },
       { n: 'Kafka', s: 'apachekafka' },
       { n: 'PostgreSQL', s: 'postgresql' }
     ] 
@@ -15,12 +15,11 @@ const skillCategories = [
   { 
     label: "AI, COPILOTS & SDKS", 
     items: [
-      { n: 'OpenAI', s: 'openai' },
+      { n: 'OpenAI', s: 'openai', c: 'white' }, // Forced white
       { n: 'Claude', s: 'anthropic' },
-      { n: 'Ollama', s: 'ollama' },
+      { n: 'Ollama', s: 'ollama', c: 'white' }, // Forced white
       { n: 'Perplexity', s: 'perplexity' },
-      { n: 'Cursor', s: 'cursor' }
-      
+      { n: 'Cursor', s: 'cursor', c: 'white' }  // Forced white
     ] 
   },
   { 
@@ -28,20 +27,19 @@ const skillCategories = [
     items: [
       { n: 'Python', s: 'python' },
       { n: 'Pandas', s: 'pandas' },
-      { n: 'Tableau', img: '/tableau.png' },
-      { n: 'Power BI', img: '/powerbi.png' }
+      { n: 'Tableau', s: 'tableau' },
+      { n: 'Power BI', s: 'powerbi' }
     ] 
   },
-
-    { 
-      label: "ANALYTICS & INTELLIGENCE", 
-      items: [
-        { n: 'Python', s: 'python' },
-        { n: 'Pandas', s: 'pandas' },
-        { n: 'Tableau', img: 'https://upload.wikimedia.org/wikipedia/commons/4/4b/Tableau_Logo.png' },
-        { n: 'Power BI', img: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg' }
-      ] 
-    }
+  { 
+    label: "TOOLS & EXTRAS", 
+    items: [
+      { n: 'Git', s: 'git' },
+      { n: 'GitHub', s: 'github', c: 'white' }, // Forced white
+      { n: 'Docker', s: 'docker' },
+      { n: 'Vercel', s: 'vercel', c: 'white' }   // Forced white
+    ] 
+  }
 ];
 
 export default function SkillsSection() {
@@ -69,20 +67,28 @@ export default function SkillsSection() {
               {cat.label}
             </h3>
             <div className="flex flex-wrap gap-3">
-              {cat.items.map((item) => (
-                <div 
-                  key={item.n} 
-                  className="flex items-center gap-3 bg-[#111] border border-[#333] px-4 py-2 rounded-full shadow-sm hover:border-primary/50 transition-colors cursor-default"
-                >
-                  <img 
-                    src={`https://cdn.simpleicons.org/${item.s}`} 
-                    className="w-4 h-4 object-contain" 
-                    alt={`${item.n} logo`} 
-                    loading="lazy"
-                  />
-                  <span className="text-sm font-medium text-foreground/90">{item.n}</span>
-                </div>
-              ))}
+              {cat.items.map((item) => {
+                
+                // THE FIX: If there is a color 'c', add it. If not, just use the slug. No broken slashes.
+                const imageSource = item.c 
+                  ? `https://cdn.simpleicons.org/${item.s}/${item.c}` 
+                  : `https://cdn.simpleicons.org/${item.s}`;
+                
+                return (
+                  <div 
+                    key={item.n} 
+                    className="flex items-center gap-3 bg-[#111] border border-[#333] px-4 py-2 rounded-full shadow-sm hover:border-primary/50 transition-colors cursor-default"
+                  >
+                    <img 
+                      src={imageSource} 
+                      className="w-4 h-4 object-contain" 
+                      alt={`${item.n} logo`} 
+                      loading="lazy"
+                    />
+                    <span className="text-sm font-medium text-foreground/90">{item.n}</span>
+                  </div>
+                );
+              })}
             </div>
           </motion.div>
         ))}
