@@ -1,41 +1,44 @@
 import { motion } from 'framer-motion';
+import { FaAws, FaPython, FaDocker, FaGithub, FaGitAlt, FaDatabase } from 'react-icons/fa';
+import { SiSnowflake, SiDbt, SiOpenai, SiPandas, SiTableau, SiPowerbi, SiVercel } from 'react-icons/si';
+import { BsRobot, BsStars, BsTerminal } from 'react-icons/bs';
 
 const skillCategories = [
   { 
     label: "DATA ENGINEERING", 
     items: [
-      { n: 'Snowflake', s: 'snowflake' },
-      { n: 'AWS', s: 'amazonaws', c: 'white' }, 
-      { n: 'dbt', s: 'dbt', c: 'FF694B' } // Using dbt's official orange hex color
+      { n: 'Snowflake', icon: <SiSnowflake className="w-4 h-4 text-[#29B5E8]" /> },
+      { n: 'AWS', icon: <FaAws className="w-5 h-5 text-white" /> }, 
+      { n: 'dbt', icon: <SiDbt className="w-4 h-4 text-[#FF694B]" /> } 
     ] 
   },
   { 
     label: "AI, COPILOTS & SDKS", 
     items: [
-      { n: 'OpenAI', s: 'openai', c: 'white' },
-      { n: 'Claude', s: 'anthropic' },
-      { n: 'Ollama', s: 'ollama', c: 'white' },
-      { n: 'Perplexity', s: 'perplexity' },
-      { n: 'Cursor', s: 'cursor', c: 'white' }
+      { n: 'OpenAI', icon: <SiOpenai className="w-4 h-4 text-white" /> },
+      { n: 'Claude', icon: <BsRobot className="w-4 h-4 text-[#D97757]" /> },
+      { n: 'Ollama', icon: <BsRobot className="w-4 h-4 text-white" /> },
+      { n: 'Perplexity', icon: <BsStars className="w-4 h-4 text-[#22B8CD]" /> },
+      { n: 'Cursor', icon: <BsTerminal className="w-4 h-4 text-white" /> }
     ] 
   },
   { 
     label: "ANALYTICS & INTELLIGENCE", 
     items: [
-      { n: 'Python', s: 'python' },
-      { n: 'SQL', s: 'mysql', c: 'white' }, // Using the MySQL logo in white as a clean SQL icon
-      { n: 'Pandas', s: 'pandas' },
-      { n: 'Tableau', s: 'tableau' },
-      { n: 'Power BI', s: 'powerbi' }
+      { n: 'Python', icon: <FaPython className="w-4 h-4 text-[#3776AB]" /> },
+      { n: 'SQL', icon: <FaDatabase className="w-4 h-4 text-white" /> }, 
+      { n: 'Pandas', icon: <SiPandas className="w-4 h-4 text-white" /> },
+      { n: 'Tableau', icon: <SiTableau className="w-4 h-4 text-[#E97627]" /> },
+      { n: 'Power BI', icon: <SiPowerbi className="w-4 h-4 text-[#F2C811]" /> }
     ] 
   },
   { 
     label: "TOOLS & EXTRAS", 
     items: [
-      { n: 'Git', s: 'git' },
-      { n: 'GitHub', s: 'github', c: 'white' },
-      { n: 'Docker', s: 'docker' },
-      { n: 'Vercel', s: 'vercel', c: 'white' }
+      { n: 'Git', icon: <FaGitAlt className="w-4 h-4 text-[#F05032]" /> },
+      { n: 'GitHub', icon: <FaGithub className="w-4 h-4 text-white" /> },
+      { n: 'Docker', icon: <FaDocker className="w-4 h-4 text-[#2496ED]" /> },
+      { n: 'Vercel', icon: <SiVercel className="w-4 h-4 text-white" /> }
     ] 
   }
 ];
@@ -65,28 +68,16 @@ export default function SkillsSection() {
               {cat.label}
             </h3>
             <div className="flex flex-wrap gap-3">
-              {cat.items.map((item) => {
-                
-                // Pure CDN Logic: No external hotlinks that can break
-                const imageSource = item.c 
-                  ? `https://cdn.simpleicons.org/${item.s}/${item.c}` 
-                  : `https://cdn.simpleicons.org/${item.s}`;
-                
-                return (
-                  <div 
-                    key={item.n} 
-                    className="flex items-center gap-3 bg-[#111] border border-[#333] px-4 py-2 rounded-full shadow-sm hover:border-primary/50 transition-colors cursor-default"
-                  >
-                    <img 
-                      src={imageSource} 
-                      className="w-4 h-4 object-contain" 
-                      alt={`${item.n} logo`} 
-                      loading="lazy"
-                    />
-                    <span className="text-sm font-medium text-foreground/90">{item.n}</span>
-                  </div>
-                );
-              })}
+              {cat.items.map((item) => (
+                <div 
+                  key={item.n} 
+                  className="flex items-center gap-3 bg-[#111] border border-[#333] px-4 py-2 rounded-full shadow-sm hover:border-primary/50 transition-colors cursor-default"
+                >
+                  {/* Rendering the React component directly instead of an <img> tag */}
+                  {item.icon}
+                  <span className="text-sm font-medium text-foreground/90">{item.n}</span>
+                </div>
+              ))}
             </div>
           </motion.div>
         ))}
